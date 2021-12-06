@@ -1,0 +1,18 @@
+.header__link {
+  font-size: 18px;
+  line-height: 22px;
+  color: inherit;
+  text-decoration: none;
+  margin: 0 24px 0 0;
+}
+
+@media screen and (max-width: 450px) {
+  .header__link {
+    font-size: 16px;
+    line-height: 16.94px;
+  }
+}
+
+.header__link:last-child {
+  margin-right: 0;
+}

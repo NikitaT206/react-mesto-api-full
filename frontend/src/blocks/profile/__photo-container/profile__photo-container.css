@@ -1,0 +1,36 @@
+.profile__photo-container {
+  margin-right: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+
+.profile__photo-container::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-image: url(../../../images/icons/Pencil.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 26px 26px;
+  opacity: 0;
+  transition: opacity .2s linear;
+  border-radius: 50%;
+}
+
+.profile__photo-container:hover:after {
+  opacity: 1;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__photo-container {
+    margin: 0 0 22px;
+  }
+}

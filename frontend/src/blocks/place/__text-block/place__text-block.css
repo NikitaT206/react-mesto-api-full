@@ -1,0 +1,11 @@
+.place__text-block {
+  max-width: 100%;
+  background-color: white;
+  color: black;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  min-height: 85px;
+  box-sizing: border-box;
+}

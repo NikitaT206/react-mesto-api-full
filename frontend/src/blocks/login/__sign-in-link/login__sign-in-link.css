@@ -1,0 +1,15 @@
+.login__sign-in-link {
+  font-size: 14px;
+  line-height: 17px;
+  margin-top: 15px;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+@media screen and (max-width: 450px) {
+  .login__sign-in-link {
+    margin-top: 20px;
+  }
+}

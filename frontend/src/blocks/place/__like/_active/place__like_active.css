@@ -1,0 +1,9 @@
+.place__like_active {
+  background: url(../../../../images/icons/BlackHeart.svg);
+  transition: .2s ease;
+  opacity: 1;
+}
+
+.place__like_active:hover {
+  opacity: 1;
+}
