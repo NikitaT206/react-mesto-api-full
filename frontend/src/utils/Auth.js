@@ -51,4 +51,4 @@ class Auth {
   }
 }
 
-export const auth = new Auth('https://auth.nomoreparties.co/')
+export const auth = new Auth('https://mesto.nikitat206.back.ru.nomoredomains.rocks/')

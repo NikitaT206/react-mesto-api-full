@@ -1,6 +1,6 @@
 class Api {
   constructor() {
-    this._url = 'https://mesto.nomoreparties.co/v1/cohort-27/'
+    this._url = 'https://mesto.nikitat206.back.ru.nomoredomains.rocks/'
     this._headers = { authorization: '9226f8e1-b342-433e-90bd-aa64e2df547e', 'Content-Type': 'application/json'}
   }
 
