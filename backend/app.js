@@ -2,11 +2,9 @@
 // brew services start mongodb-community@5.0
 
 const express = require('express');
-const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
 
 const app = express();
-app.use(cors());
 const mongoose = require('mongoose');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const bodyParser = require('body-parser');
