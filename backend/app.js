@@ -16,6 +16,13 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', '*');
+  res.header('Access-Control-Allow-Headers', '*');
+  return res.end();
+});
+
 app.listen(PORT, () => {
   console.log(`App listen on port ${PORT}`);
 });
