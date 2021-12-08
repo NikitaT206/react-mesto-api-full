@@ -55,8 +55,8 @@ function App() {
 
   function handleLogin(data) {
     auth.authorization(data).then((data) => {
-      localStorage.setItem('token', data.token)
-      if (data.token) {
+      localStorage.setItem('token', data.data)
+      if (data.data) {
         setLoggedIn(true)
         if (loggedIn) {
           history.push('/')
@@ -70,9 +70,10 @@ function App() {
   }
 
   function handleLogOut() {
-    localStorage.removeItem('token')
     setBurgerOpen(false)
     setLoggedIn(false)
+    localStorage.removeItem('token')
+    setCurrentUser({})
   }
 
   function tokenCheck() {
@@ -81,7 +82,7 @@ function App() {
       if (jwt) {
         auth.getContent(jwt).then((data) => {
           if (data) {
-            setEmail(data.data.email)
+            setEmail(data.data[0].email)
             setLoggedIn(true)
             if (loggedIn) {
               history.push('/')
@@ -99,11 +100,11 @@ function App() {
   useEffect(() => {
     api.getInitialData().then(data => {
       const [userData, cardsData] = data
-      setCurrentUser(userData)
-      setCards(cardsData)
+      setCurrentUser(userData.data[0])
+      setCards(cardsData.data)
 
     }).catch(err => console.log(err))
-  }, [])
+  }, [loggedIn])
 
   useEffect(() => {
     const closeByEscape = (event) => {
@@ -118,7 +119,7 @@ function App() {
 }, [])
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id)
+    const isLiked = card.likes.some(i => i === currentUser._id)
 
     api.changeLikeCardStatus(card, !isLiked)
     .then((newCard) => {
@@ -135,21 +136,21 @@ function App() {
 
   function handleUpdateUser(data) {
     api.setUserInfo(data).then(data => {
-      setCurrentUser(data)
+      setCurrentUser(data.data)
       closeAllPopups()
     }).catch(err => console.log(err))
   }
 
   function handleUpdateAvatar(data) {
     api.setAvatar(data).then(data => {
-      setCurrentUser(data)
+      setCurrentUser(data.data)
       closeAllPopups()
     }).catch(err => console.log(err))
   }
 
   function handleAddPlaceSubmit(data) {
     api.createCard(data).then((data) => {
-      setCards([data, ...cards])
+      setCards([data.data, ...cards])
       closeAllPopups()
     }).catch(err => console.log(err))
   }

@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-unused-vars */
 // brew services start mongodb-community@5.0
-
+require('dotenv').config();
 const express = require('express');
 const { celebrate, Joi, errors } = require('celebrate');
 

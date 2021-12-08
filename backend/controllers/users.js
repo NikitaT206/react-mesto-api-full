@@ -112,6 +112,7 @@ module.exports.updateUserAvatar = ((req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
+  const { NODE_ENV, JWT_SECRET } = process.env;
 
   User.findOne({ email }).select('+password')
     .then((user) => {
@@ -123,8 +124,11 @@ module.exports.login = (req, res, next) => {
           if (!matched) {
             throw new UnauthorizedError('Неправльные почта или пароль');
           }
-          const token = jwt.sign({ _id: user._id }, 'secret-key', { expiresIn: '7d' });
-
+          const token = jwt.sign(
+            { _id: user._id },
+            NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+            { expiresIn: '7d' },
+          );
           res.cookie('jwt', token, { maxAge: 3600000, httpOnly: true }).send({ data: token });
         })
 

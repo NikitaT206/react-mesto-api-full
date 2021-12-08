@@ -1,7 +1,7 @@
 class Api {
   constructor() {
     this._url = 'https://mesto.nikitat206.back.ru.nomoredomains.rocks/'
-    this._headers = { 'Authorization': 'Bearer ' + localStorage.getItem('token'), 'Content-Type': 'application/json'}
+    this._headers = { authorization: 'Bearer ' + localStorage.getItem('token'), 'Content-Type': 'application/json'}
   }
 
   _returnRes(res) {
@@ -66,7 +66,7 @@ class Api {
   }
 
   setLike(data) {
-    return fetch(this._url + `cards/likes/${data._id}`, {
+    return fetch(this._url + `cards/${data._id}/likes`, {
       headers: this._headers,
       method: 'PUT',
     })
@@ -74,7 +74,7 @@ class Api {
   }
 
   deleteLike(data) {
-    return fetch(this._url + `cards/likes/${data._id}`, {
+    return fetch(this._url + `cards/${data._id}/likes`, {
       headers: this._headers,
       method: 'DELETE',
     })
