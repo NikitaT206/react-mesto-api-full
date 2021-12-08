@@ -56,7 +56,8 @@ function App() {
   function handleLogin(data) {
     auth.authorization(data).then((data) => {
       localStorage.setItem('token', data.data)
-      if (data.data) {
+      const token = localStorage.getItem('token')
+      if (token) {
         setLoggedIn(true)
         if (loggedIn) {
           history.push('/')
@@ -70,10 +71,10 @@ function App() {
   }
 
   function handleLogOut() {
+    setCurrentUser({})
     setBurgerOpen(false)
     setLoggedIn(false)
     localStorage.removeItem('token')
-    setCurrentUser({})
   }
 
   function tokenCheck() {
@@ -95,16 +96,16 @@ function App() {
   
   useEffect(() => {
     tokenCheck()
-  }, [loggedIn])
+    if (loggedIn) {
+      api.getUserInfo().then(data => {
+        setCurrentUser(data.data[0])
+      }).catch(err => console.log(err))
 
-  useEffect(() => {
-    api.getInitialData().then(data => {
-      const [userData, cardsData] = data
-      setCurrentUser(userData.data[0])
-      setCards(cardsData.data)
-
-    }).catch(err => console.log(err))
-  }, [loggedIn])
+      api.getInitialCard().then(data => {
+        setCards(data.data, ...cards)
+      }).catch(err => console.log(err))
+      }
+  }, )
 
   useEffect(() => {
     const closeByEscape = (event) => {
