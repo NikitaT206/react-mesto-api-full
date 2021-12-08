@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable consistent-return */
 /* eslint-disable no-unused-vars */
 // brew services start mongodb-community@5.0
@@ -51,7 +52,7 @@ app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
-    avatar: Joi.string().validate(),
+    avatar: Joi.string().regex(/^(https?:\/\/)(www)?([\da-z\.-]+)\.([a-z]{2,3})([\/\w\W \.-]*)*\/?#?$/),
   }).unknown(true),
 }), createUser);
 app.post('/signin', celebrate({
