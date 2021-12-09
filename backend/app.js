@@ -53,8 +53,11 @@ app.post('/signup', celebrate({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
     avatar: Joi.string().regex(/^(https?:\/\/)(www)?([\da-z\.-]+)\.([a-z]{2,3})([\/\w\W \.-]*)*\/?#?$/),
-  }).unknown(true),
+    about: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30),
+  }),
 }), createUser);
+
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
