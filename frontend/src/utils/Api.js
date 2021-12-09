@@ -2,7 +2,7 @@ const jwt = localStorage.getItem('token')
 class Api {
   constructor() {
     this._url = 'https://mesto.nikitat206.back.ru.nomoredomains.rocks/'
-    this._headers = { authorization: 'Bearer ' + jwt, 'Content-Type': 'application/json'}
+    this._headers = { authorization: 'Bearer ' + jwt, 'Content-Type': 'application/json', credentials: "include"}
   }
 
   _returnRes(res) {

@@ -84,6 +84,7 @@ function App() {
         auth.getContent(jwt).then((data) => {
           if (data) {
             setEmail(data.data[0].email)
+            setCurrentUser(data.data[0])
             setLoggedIn(true)
             if (loggedIn) {
               history.push('/')
@@ -95,17 +96,21 @@ function App() {
   }
   
   useEffect(() => {
-    tokenCheck()
-    if (loggedIn) {
+    tokenCheck()  
+  }, [loggedIn])
+
+  useEffect(() => {
+    console.log(localStorage.getItem('token'))
+    if (localStorage.getItem('token')) {
       api.getUserInfo().then(data => {
         setCurrentUser(data.data[0])
       }).catch(err => console.log(err))
-
+    
       api.getInitialCard().then(data => {
         setCards(data.data, ...cards)
       }).catch(err => console.log(err))
-      }
-  }, )
+    }
+  }, [loggedIn, history])
 
   useEffect(() => {
     const closeByEscape = (event) => {
