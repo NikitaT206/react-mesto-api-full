@@ -12,24 +12,33 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`)
   }
 
-  getUserInfo() {
+  getUserInfo(token) {
     return fetch(this._url + 'users/me', {
-      headers: this._headers
+      headers: {
+        authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      }
     })
       .then(this._returnRes)
   }
 
-  getInitialCard() {
+  getInitialCard(token) {
     return fetch(this._url + 'cards', {
-      headers: this._headers
+      headers: {
+        authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      }
     })
       .then(this._returnRes)
   }
 
-  setUserInfo(data) {
+  setUserInfo(data, token) {
     return fetch(this._url + 'users/me', {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         name: data.name,
         about: data.about
@@ -38,9 +47,12 @@ class Api {
       .then(this._returnRes)
   }
 
-  createCard(data) {
+  createCard(data, token) {
     return fetch(this._url + 'cards', {
-      headers: this._headers,
+      headers: {
+        authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
       method: 'POST',
       body: JSON.stringify({
         name: data.name,
@@ -50,41 +62,53 @@ class Api {
       .then(this._returnRes)
   }
 
-  deleteCard(data) {
+  deleteCard(data, token) {
     return fetch(this._url + `cards/${data._id}`, {
-      headers: this._headers,
+      headers: {
+        authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
       method: 'DELETE'
     })
       .then(this._returnRes)
   }
 
-  changeLikeCardStatus(data, isLiked) {
+  changeLikeCardStatus(data, isLiked, token) {
     if (isLiked) {
-      return this.setLike(data)
+      return this.setLike(data, token)
     } else {
-      return this.deleteLike(data)
+      return this.deleteLike(data, token)
     }
   }
 
-  setLike(data) {
+  setLike(data, token) {
     return fetch(this._url + `cards/${data._id}/likes`, {
-      headers: this._headers,
+      headers: {
+        authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
       method: 'PUT',
     })
       .then(this._returnRes)
   }
 
-  deleteLike(data) {
+  deleteLike(data, token) {
     return fetch(this._url + `cards/${data._id}/likes`, {
-      headers: this._headers,
+      headers: {
+        authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
       method: 'DELETE',
     })
       .then(this._returnRes)
   }
 
-  setAvatar(data) {
+  setAvatar(data, token) {
     return fetch(this._url + `users/me/avatar`, {
-      headers: this._headers,
+      headers: {
+        authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
       method: 'PATCH',
       body: JSON.stringify({
         avatar: data.avatar
